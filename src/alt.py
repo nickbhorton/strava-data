@@ -4,7 +4,9 @@ import requests
 import random
 from os import listdir
 
-access_token = '4b369d37eceeff2a6a92bb7f69ffea33175703a2'
+access_file = open("access.secret", "r")
+access_token, refresh_token, expires_at = access_file.read().strip().split(",")
+access_file.close()
 
 ids = open("act2024/ids.txt", "r")
 ids = ids.read().split()
@@ -21,13 +23,13 @@ for id in ids:
         uncomputed_ids.append(id)
 
 print(len(uncomputed_ids), "ids left")
-for i in range(16,92):
+for i in range(26):
     id = uncomputed_ids[i]
     print(i, id)
     url = "https://www.strava.com/api/v3/activities/{id}/streams".format(id = id)
     payload = {"keys": ["altitude"], "key_by_type": "true"}
     headers = {"Authorization": "Bearer " + access_token}
-    # r = requests.get(url, params=payload, headers=headers)
+    r = requests.get(url, params=payload, headers=headers)
     if r.status_code != 200:
         print(r.status_code)
         print(r.url)
