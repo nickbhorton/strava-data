@@ -5,3 +5,4 @@ lib
 lib64
 *.secret
 data
+api_reads.txt

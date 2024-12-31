@@ -5,7 +5,7 @@ import json
 access_file = open("access.secret", "r")
 access_token, refresh_token, expires_at = access_file.read().strip().split(",")
 
-page_number = 2
+page_number = 1
 while True:
     url = "https://www.strava.com/api/v3/athlete/activities"
     payload = {"before": int(time.time()), "after": 0, "page": page_number, "per_page": 200}
@@ -21,3 +21,5 @@ while True:
     print(len(jc))
     if len(jc) != 200:
         quit()
+
+
